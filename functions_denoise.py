@@ -72,13 +72,16 @@ def compute_abs_squared_stft(signal):
     signal_stft_abs = np.abs(signal_stft)**2
     return signal_stft_abs
 
-def display_spectogramm(signal):
+def display_spectogramm(signal , save_img = 0, name_to_save =None):
     #signal_stft_abs = compute_abs_squared_stft(signal)
     signal_stft_abs = signal
     fig, ax = plt.subplots()
     img = librosa.display.specshow(librosa.amplitude_to_db(signal_stft_abs,ref=np.max),y_axis='log', x_axis='time', ax=ax)
     ax.set_title('Power spectrogram')
     fig.colorbar(img, ax=ax, format="%+2.0f dB")
+    if save_img == 1: 
+
+        plt.savefig( name_to_save)
 
 def get_spectro_signal(signal):
     signal_abs = compute_abs_squared_stft(signal)
